@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_13_02
 {
-    class Pet
+    internal class Pet
     {
         // Свойства класса
         public string Name { get; set; }
@@ -15,7 +15,7 @@ namespace Task_13_02
         public double Weight { get; set; }
         public bool IsHealthy { get; set; } // true - здоров, false - нездоров
 
-        
+
         // Конструктор с параметрами
         public Pet(string name, string animalType, int age, double weight, bool isHealthy)
         {
@@ -58,4 +58,5 @@ namespace Task_13_02
     }
 
 }
+    
 
