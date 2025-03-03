@@ -8,47 +8,56 @@ using System.Xml.Linq;
 
 namespace Task_13_03
 {
-    public class Car
+    class Car
     {
-        // Свойства автомобиля
-        public string LicensePlate { get; set; } // Номер авто
-        public string Brand { get; set; }         // Марка
-        public string Color { get; set; }         // Цвет
-        public double CurrentSpeed { get; private set; } // Текущая скорость
+        // Свойства класса
+        public string LicensePlate { get; set; }
+        public string Brand { get; set; }
+        public string Color { get; set; }
+        public double CurrentSpeed { get; private set; } // Текущая скорость, доступная только для чтения
 
-        private const double MaxSpeed = 150.0; // Максимально допустимая скорость
-
-        // Конструкторы
+        // Конструктор по умолчанию
+        public Car()
+        {
+            LicensePlate = "A123BC";
+            Brand = "Toyota";
+            Color = "Красный";
+            CurrentSpeed = 0.0;
+        }
+        // Конструктор с параметрами
         public Car(string licensePlate, string brand, string color)
         {
             LicensePlate = licensePlate;
             Brand = brand;
             Color = color;
-            CurrentSpeed = 0; // Изначально скорость 0
+            CurrentSpeed = 0.0;
         }
 
-        public Car(string licensePlate, string brand) : this(licensePlate, brand, "Неопределённый") { }
-
-        public Car() : this("Неизвестно", "Неизвестно", "Неопределённый") { }
-
-        // Метод для имитации ускорения
+        // Метод для симуляции ускорения
         public void Accelerate(double increment)
         {
             CurrentSpeed += increment;
-            if (CurrentSpeed > MaxSpeed)
-            {
-                CurrentSpeed = MaxSpeed; // Ограничиваем скорость максимальным значением
-                
-            }
-            Console.WriteLine($"Автомобиль {Brand} ускоряется. Текущая скорость: {CurrentSpeed} км/ч.");
+            Console.WriteLine($"Текущая скорость автомобиля {Brand} ({LicensePlate}): {CurrentSpeed} км/ч");
         }
 
-        // Метод для торможения
-        public void Brake()
+        // Метод для торможения, останавливает автомобиль при превышении скорости
+        public void Brake(double maxSpeed)
         {
-            CurrentSpeed = 0; // Останавливаем автомобиль
-            Console.WriteLine($"Автомобиль {Brand} остановлен.");
+            if (CurrentSpeed > maxSpeed)
+            {
+                Console.WriteLine($"Скорость превышает допустимую ({maxSpeed} км/ч). Автомобиль остановлен.");
+                CurrentSpeed = 0;
+            }
+            else
+            {
+                Console.WriteLine($"Автомобиль {Brand} ({LicensePlate}) тормозит. Текущая скорость: {CurrentSpeed} км/ч.");
+            }
+        }
 
+        // Метод для вывода информации об автомобиле
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"Номер авто: {LicensePlate}, Марка: {Brand}, Цвет: {Color}, Текущая скорость: {CurrentSpeed} км/ч");
         }
     }
 
